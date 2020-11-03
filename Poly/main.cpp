@@ -49,6 +49,7 @@ void Test1() {
 
 	poly = AddNode(poly, -5, 4);
 	printf("Adding -5x^4: "); Print(poly);
+
 } // end-Test1
 
 ///----------------------------------------------------------------

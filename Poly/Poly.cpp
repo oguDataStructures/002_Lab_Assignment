@@ -75,7 +75,7 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 	PolyNode* p = head;
 	PolyNode* q = NULL;
 
-	while (p != NULL && exp > p->exp) {
+	while (p != NULL && exp < p->exp) {
 		q = p;
 		p = p->next;
 	}
