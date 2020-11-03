@@ -87,7 +87,7 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 		node->next = q->next;
 		q->next = node;
 	}
-	return node;
+	return head;
 } // end-AddNode
 
 //-------------------------------------------------
