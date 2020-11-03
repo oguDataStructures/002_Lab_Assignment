@@ -57,7 +57,23 @@ PolyNode* CreatePoly(char* expr) {
 /// Walk over the poly nodes & delete them
 ///
 void DeletePoly(PolyNode* poly) {
-	// Fill this in
+
+	PolyNode* p = poly;//head adress
+	PolyNode* q = NULL;
+	while (p != NULL && p->coef != 0) {
+		q = p;
+		p = p->next;
+	}
+	if (p == NULL) return ;
+	if (q == NULL) {
+		p = p->next;
+	}
+	else
+	{
+		q->next = p->next;
+	}
+	delete p;
+
 } // end-DeletePoly
 
 //-------------------------------------------------
