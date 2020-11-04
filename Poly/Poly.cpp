@@ -56,21 +56,22 @@ PolyNode* CreatePoly(char* expr) {
 /// -------------------------------------------------
 /// Walk over the poly nodes & delete them
 ///
-void DeletePoly(PolyNode* head) {
+PolyNode* DeletePoly(PolyNode* head) {
 	PolyNode* p = head;//head adress
 	PolyNode* q = NULL;
 	while (p != NULL && p->coef != 0) {
 		q = p;
 		p = p->next;
 	}
-	if (p == NULL) return;
+	if (p == NULL) return NULL;
 	if (q == NULL) {
-		head = p->next;			//head deðiþiyor okey ama aþaðýda addNode'a aktarýlamýyor HATA SEBEBÝ BU 1
+		head = p->next;		
 	}
 	else {
 		q->next = p->next;
 	}
 	delete p;
+	return head;
 	
 } // end-DeletePoly
 
@@ -94,13 +95,12 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 			p->coef = p->coef + coef;
 			flag = true;
 			if (p->coef == 0) {
-				DeletePoly(head);
+				head = DeletePoly(head);
 			}
 			break;
 		}
 		p = p->next;
 	}
-	p = head;
 	if (flag == false) {
 		while (p != NULL && exp > p->exp) {
 			q = p;
