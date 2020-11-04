@@ -44,7 +44,7 @@ void Test1() {
 	poly = AddNode(poly, -4.4, 7);
 	printf("Adding 4.4x^7: "); Print(poly);
 
-	poly = AddNode(poly, -2, 3);
+	poly = AddNode(poly, -2, 3);					//BURADA PATLIYOR 1
 	printf("Adding -2x^3: "); Print(poly);
 
 	poly = AddNode(poly, -5, 4);
