@@ -56,24 +56,22 @@ PolyNode* CreatePoly(char* expr) {
 /// -------------------------------------------------
 /// Walk over the poly nodes & delete them
 ///
-void DeletePoly(PolyNode* poly) {
-
-	PolyNode* p = poly;//head adress
+void DeletePoly(PolyNode* head) {
+	PolyNode* p = head;//head adress
 	PolyNode* q = NULL;
 	while (p != NULL && p->coef != 0) {
 		q = p;
 		p = p->next;
 	}
-	if (p == NULL) return ;
+	if (p == NULL) return;
 	if (q == NULL) {
-		p = p->next;
+		head = p->next;			//head deðiþiyor okey ama aþaðýda addNode'a aktarýlamýyor HATA SEBEBÝ BU 1
 	}
-	else
-	{
+	else {
 		q->next = p->next;
 	}
 	delete p;
-
+	
 } // end-DeletePoly
 
 //-------------------------------------------------
@@ -90,18 +88,32 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 	node->next = NULL;
 	PolyNode* p = head;
 	PolyNode* q = NULL;
-
-	while (p != NULL && exp < p->exp) {
-		q = p;
+	bool flag = false;
+	while (p != NULL) {
+		if (p->exp == exp) {
+			p->coef = p->coef + coef;
+			flag = true;
+			if (p->coef == 0) {
+				DeletePoly(head);
+			}
+			break;
+		}
 		p = p->next;
 	}
-	if (q == NULL) {
-		node->next = head;
-		head = node;
-	}
-	else {
-		node->next = q->next;
-		q->next = node;
+	p = head;
+	if (flag == false) {
+		while (p != NULL && exp > p->exp) {
+			q = p;
+			p = p->next;
+		}
+		if (q == NULL) {
+			node->next = head;
+			head = node;
+		}
+		else {
+			node->next = q->next;
+			q->next = node;
+		}
 	}
 	return head;
 } // end-AddNode
