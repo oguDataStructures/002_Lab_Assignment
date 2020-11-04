@@ -4,7 +4,7 @@
 #include "PolyNode.h"
 
 PolyNode* CreatePoly(char* expr);
-void DeletePoly(PolyNode* poly);
+PolyNode* DeletePoly(PolyNode* poly);
 PolyNode* AddNode(PolyNode* head, double coef, int exp);
 PolyNode* Add(PolyNode* poly1, PolyNode* poly2);
 PolyNode* Subtract(PolyNode* poly1, PolyNode* poly2);
