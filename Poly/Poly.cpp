@@ -90,6 +90,7 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 	PolyNode* p = head;
 	PolyNode* q = NULL;
 	bool flag = false;
+
 	while (p != NULL) {
 		if (p->exp == exp) {
 			p->coef = p->coef + coef;
@@ -99,10 +100,12 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 			}
 			break;
 		}
+		
 		p = p->next;
 	}
+	p = head;
 	if (flag == false) {
-		while (p != NULL && exp > p->exp) {
+		while (p != NULL && exp <  p->exp) {
 			q = p;
 			p = p->next;
 		}
