@@ -100,8 +100,8 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 			p->coef = p->coef + coef;
 			if (p->coef == 0) {
 				head = p->next;
-				delete p;
 			}
+			delete node;
 			return head;
 		}
 		else
@@ -115,8 +115,8 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 			p->coef = p->coef + coef;
 			if (p->coef == 0) {
 				q->next = p->next;
-				delete p;
 			}
+			delete node;
 			return head;
 		}
 		else
