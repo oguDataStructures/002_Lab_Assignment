@@ -65,14 +65,14 @@ PolyNode* DeletePoly(PolyNode* head) {
 	}
 	if (p == NULL) return NULL;
 	if (q == NULL) {
-		head = p->next;		
+		head = p->next;
 	}
 	else {
 		q->next = p->next;
 	}
 	delete p;
 	return head;
-	
+
 } // end-DeletePoly
 
 //-------------------------------------------------
@@ -91,33 +91,41 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 	PolyNode* q = NULL;
 	bool flag = false;
 
-	while (p != NULL) {
-		if (p->exp == exp) {
-			p->coef = p->coef + coef;
-			flag = true;
-			if (p->coef == 0) {
-				head = DeletePoly(head);
-			}
-			break;
-		}
-		
+	while (p != NULL && exp < p->exp) {
+		q = p;
 		p = p->next;
 	}
-	p = head;
-	if (flag == false) {
-		while (p != NULL && exp <  p->exp) {
-			q = p;
-			p = p->next;
+	if (q == NULL) {
+		if (p != NULL && p->exp == exp) {
+			p->coef = p->coef + coef;
+			if (p->coef == 0) {
+				head = p->next;
+				delete p;
+			}
+			return head;
 		}
-		if (q == NULL) {
+		else
+		{
 			node->next = head;
 			head = node;
 		}
-		else {
+	}
+	else {
+		if (p != NULL && p->exp == exp) {
+			p->coef = p->coef + coef;
+			if (p->coef == 0) {
+				q->next = p->next;
+				delete p;
+			}
+			return head;
+		}
+		else
+		{
 			node->next = q->next;
 			q->next = node;
 		}
 	}
+
 	return head;
 } // end-AddNode
 
