@@ -1,6 +1,2 @@
-C:\Users\yasem\Desktop\Ders\3.sınıf\1.Dönem\Veri Yapıları Lab\2.Hafta\Poly\x64\Debug\Poly.exe
-C:\Users\yasem\Desktop\Ders\3.sınıf\1.Dönem\Veri Yapıları Lab\2.Hafta\Poly\x64\Debug\Poly.pdb
-D:\Data_Sturucture_Fall_2021\002_Lab_Assignment\Poly\x64\Debug\Poly.exe
-D:\Data_Sturucture_Fall_2021\002_Lab_Assignment\Poly\x64\Debug\Poly.pdb
-C:\Users\yasem\Desktop\Yeni klasör\002_Lab_Assignment\Poly\x64\Debug\Poly.exe
-C:\Users\yasem\Desktop\Yeni klasör\002_Lab_Assignment\Poly\x64\Debug\Poly.pdb
+C:\Users\yasem\Desktop\Poly\x64\Debug\Poly.exe
+C:\Users\yasem\Desktop\Poly\x64\Debug\Poly.pdb

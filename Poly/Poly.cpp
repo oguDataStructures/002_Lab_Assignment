@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include<string>
 #include "Poly.h"
-#pragma warning(disable : 4996)
+#include <string>
 using namespace std;
 
 //-------------------------------------------------
@@ -17,62 +16,63 @@ using namespace std;
 // Ex6: -3x^4    +   4x
 // Ex7: -2x  - 5
 //
+string RemoveSpaces(string str) {
+	int i = 0, j = 0;
+	while (str[i]) {
+		if (str[i] != ' ') {
+			str[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	str[j] = '\0';
 
-void removeSpaces(char* str) {
-	// To keep track of non-space character count 
-	int count = 0;
-
-	// Traverse the given string. If current character 
-	// is not space, then place it at index 'count++' 
-	for (int i = 0; str[i]; i++)
-		if (str[i] != ' ')
-			str[count++] = str[i]; // here count is 
-								   // incremented 
-	str[count] = '\0';
+	return str;
 }
-void Parse(char* str) {
-	int count = 0;
-	int i = 0;
-	int* size = new int[100];
-	char* token = strtok(str, "^");
+void Parse(string str) {
+	/*int i = 0;
+	const char ch1 = '+';
+	const char ch2 = '-';
+	string bos_deneme;
+	string cpy = str;
+	int pos1 = 0;
+	int pos2 = 0;
+	pos1 = cpy.find(ch1);
+	pos2 = cpy.find(ch2);
 	PolyNode node;
+	node.coef = 0;
 	node.exp = 0;
-	if (*token == 'x') {
-		node.coef = 1;
-	}
-	else {
-		node.coef = stod(strtok(str, "x"));
-	}
-	while (token != NULL) {
-		node.exp += atoi(token);
-		token = std::strtok(NULL, " ");
-	}
+	node.next = NULL;
+	int coef = 0, exp = 0;
+	while (cpy.length() != 0) {
+		if (pos1 < pos2) {
+			bos_deneme = cpy.substr(0, pos1);
+			cpy.erase(0, pos1);
+			pos1 = cpy.find(ch1);
+		}
+		else {
+			if (pos2 == 0) {
+				continue;
+			}
+			bos_deneme = cpy.substr(0, pos2);
+			cpy.erase(0, pos2);
+			pos2 = cpy.find(ch2);
+		}
+	}*/
 
 }
 PolyNode* CreatePoly(char* expr) {
+	string str = expr;
+	str = RemoveSpaces(expr);
+	Parse(str);
 	return NULL;
 } //end-CreatePoly
 
 /// -------------------------------------------------
 /// Walk over the poly nodes & delete them
 ///
-PolyNode* DeletePoly(PolyNode* head) {
-	PolyNode* p = head;//head adress
-	PolyNode* q = NULL;
-	while (p != NULL && p->coef != 0) {
-		q = p;
-		p = p->next;
-	}
-	if (p == NULL) return NULL;
-	if (q == NULL) {
-		head = p->next;
-	}
-	else {
-		q->next = p->next;
-	}
-	delete p;
-	return head;
-
+void DeletePoly(PolyNode* poly) {
+	// Fill this in
 } // end-DeletePoly
 
 //-------------------------------------------------
@@ -127,6 +127,7 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 	}
 
 	return head;
+	return NULL;
 } // end-AddNode
 
 //-------------------------------------------------
@@ -168,7 +169,7 @@ double Evaluate(PolyNode* poly, double x) {
 // Computes the derivative of the polynomial and returns it
 // Ex: poly(x) = 3x^4 - 2x + 1-->Derivative(poly) = 12x^3 - 2
 //
-PolyNode* Derivative() {
+PolyNode* Derivative(PolyNode* poly) {
 	// Fill this in
 	return NULL;
 } //end-Derivative
@@ -184,34 +185,3 @@ PolyNode* Derivative() {
 void Plot(PolyNode* poly, int x1, int x2) {
 	// Fill this in	
 } //end-Plot
-
-//-------------------------------------------------
-// Prints a polynomial in a nicely formatted manner
-//
-void Print(PolyNode* poly) {
-	if (poly == NULL) { printf("<NULL>\n"); return; }
-
-	printf("<");
-	PolyNode* p = poly;
-	while (p != NULL) {
-		if (p->exp == 0) {
-			printf("%+-3.1f", p->coef);
-
-		}
-		else if (p->exp == 1) {
-			if (p->coef == 1.0) printf("+x ");
-			else if (p->coef == -1.0) printf("-x ");
-			else printf("%+-3.1fx ", p->coef);
-
-		}
-		else {
-			if (p->coef == 1.0) printf("+x^%-2d ", p->exp);
-			else if (p->coef == -1.0) printf("-x^%-2d ", p->exp);
-			else printf("%+-3.1fx^%-2d ", p->coef, p->exp);
-		} //end-else
-
-		p = p->next;
-	} // end-while
-
-	printf(">\n");
-} //end-Print	
