@@ -15,7 +15,7 @@ int main() {
 	Test1();
 	printf("========================================================\n");
 	Test2();
-	printf("========================================================\n");
+	/*printf("========================================================\n");
 	Test3();
 	printf("========================================================\n");
 	Test4();
@@ -26,7 +26,7 @@ int main() {
 	printf("========================================================\n");
 	Test7();
 	printf("========================================================\n");
-	Test8();
+	Test8();*/
 
 	return 0;
 } // end-main
@@ -105,37 +105,38 @@ void Test1() {
 void Test2() {
 	printf("%40s", "******TEST2******\n");
 
-	PolyNode *poly = CreatePoly((char *)"-x^3  -  6x^2 + 4x + 22");
-	printf("[-x^3  -  6x^2 + 4x + 22]: "); Print(poly);
-	DeletePoly(poly);
+	PolyNode *poly0 = CreatePoly((char *)"-x^3  -  6x^2 + 4x + 22");
+	printf("[-x^3  -  6x^2 + 4x + 22]: "); Print(poly0);
+	printf("[-x^3  -  6x^2 + 4x + 22] is deleted:"); DeletePoly(poly0);
 
-	poly = CreatePoly((char*)"-x^2 +x  -  5");
-	printf("[-x^2 +x  -  5]: "); Print(poly);
-	DeletePoly(poly);
 
-	poly = CreatePoly((char*)"2.3x^4 + 5x^3 - 2.6x - 4");
-	printf("[2.3x^4 + 5x^3 - 2.6x - 4]: "); Print(poly);
-	DeletePoly(poly);
+	PolyNode* poly1 = CreatePoly((char*)"-x^2 +x  -  5");
+	printf("[-x^2 +x  -  5]: "); Print(poly1);
+	printf("[-x^2 +x  -  5] is deleted:"); DeletePoly(poly1);
 
-	poly = CreatePoly((char*)"-4.5x^10 - 45.44");
-	printf("[-4.5x^10 - 45.44]: "); Print(poly);
-	DeletePoly(poly);
+	PolyNode* poly2 = CreatePoly((char*)"2.3x^4 + 5x^3 - 2.6x - 4");
+	printf("[2.3x^4 + 5x^3 - 2.6x - 4]: "); Print(poly2);
+	printf("[2.3x^4 + 5x^3 - 2.6x - 4] is deleted:"); DeletePoly(poly2);
 
-	poly = CreatePoly((char*)"x^6 + 24.6x^4 - x^3 - 61.3x^1 + 4.2");
-	printf("[x^6 + 24.6x^4 - x^3 - 61.3x^1 + 4.2]: "); Print(poly);
-	DeletePoly(poly);
+	PolyNode* poly3 = CreatePoly((char*)"-4.5x^10 - 45.44");
+	printf("[-4.5x^10 - 45.44]: "); Print(poly3);
+	printf("[-4.5x^10 - 45.44] is deleted:"); DeletePoly(poly3);
 
-	poly = CreatePoly((char*)" -x^34+x^20 -34.3x^5  +   x -  55");
-	printf("[ -x^34+x^20 -34.3x^5  +   x -  55]: "); Print(poly);
-	DeletePoly(poly);
+	PolyNode* poly4 = CreatePoly((char*)"x^6 + 24.6x^4 - x^3 - 61.3x^1 + 4.2");
+	printf("[x^6 + 24.6x^4 - x^3 - 61.3x^1 + 4.2]: "); Print(poly4);
+	printf("[x^6 + 24.6x^4 - x^3 - 61.3x^1 + 4.2] is deleted:"); DeletePoly(poly4);
 
-	poly = CreatePoly((char*)"x^6 + 24.6x^4 - x^3 - 61.3x + 4.2");
-	printf("[x^6 + 24.6x^4 - x^3 - 61.3x + 4.2]: "); Print(poly);
-	DeletePoly(poly);
+	PolyNode* poly5 = CreatePoly((char*)" -x^34+x^20 -34.3x^5  +   x -  55");
+	printf("[ -x^34+x^20 -34.3x^5  +   x -  55]: "); Print(poly5);
+	printf("[ -x^34+x^20 -34.3x^5  +   x -  55] is deleted:"); DeletePoly(poly5);
 
-	poly = CreatePoly((char*)"-33");
-	printf("[-33]: "); Print(poly);
-	DeletePoly(poly);
+	PolyNode* poly6 = CreatePoly((char*)"x^6 + 24.6x^4 - x^3 - 61.3x + 4.2");
+	printf("[x^6 + 24.6x^4 - x^3 - 61.3x + 4.2]: "); Print(poly6);
+	printf("[x^6 + 24.6x^4 - x^3 - 61.3x + 4.2] is deleted:"); DeletePoly(poly6);
+
+	PolyNode* poly7 = CreatePoly((char*)"-33");
+	printf("[-33]: "); Print(poly7);
+	printf("[-33] is deleted:"); DeletePoly(poly7);
 } //end-Test2
 
 ///----------------------------------------------------------------

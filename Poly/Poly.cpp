@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "Poly.h"
 #include <string>
+#include <iostream>
+
 using namespace std;
 
 //-------------------------------------------------
@@ -105,8 +107,17 @@ PolyNode* CreatePoly(char* expr) {
 /// -------------------------------------------------
 /// Walk over the poly nodes & delete them
 ///
-void DeletePoly(PolyNode* poly) {
+void DeletePoly(PolyNode* Poly) {
 	// Fill this in
+	PolyNode* p = NULL;
+	while ( Poly != NULL)
+	{
+		p = Poly->next;
+		delete Poly;
+		Poly = p;
+	}
+	Print(Poly);
+
 } // end-DeletePoly
 
 //-------------------------------------------------
