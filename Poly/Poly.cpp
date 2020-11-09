@@ -17,55 +17,89 @@ using namespace std;
 // Ex7: -2x  - 5
 //
 string RemoveSpaces(string str) {
-	int i = 0, j = 0;
-	while (str[i]) {
-		if (str[i] != ' ') {
-			str[j] = str[i];
-			j++;
+	str.erase(remove(str.begin(), str.end(), ' '), str.end());
+	return str;
+}
+PolyNode* Parse(string str,PolyNode* head) {
+	string const delims{ "-+" };
+	string const delims1{ "^" };
+	string token[100];
+	size_t beg, pos = 0;
+	int i = 0;
+	string coef;
+	string exp;
+	double coef_double;
+	int exp_int;
+	int count = 0;
+	while ((beg = str.find_first_not_of(delims, pos)) != string::npos)
+	{
+		pos = str.find_first_of(delims, beg + 1);
+		if (beg == 0) {
+			token[i] = str.substr(beg, pos - beg);
+		}
+		else {
+			token[i] = str.substr(beg - 1, pos - beg + 1);
 		}
 		i++;
 	}
-	str[j] = '\0';
+	pos = 0;
+	i = 0;
+	while (!token[i].empty()) {
+		if ((pos = token[i].find(delims1)) != string::npos) {
+			coef = token[i].substr(0, pos - 1);
+			if (coef == "-") {
+				coef_double = -1;
+			}
+			else if (coef == "+" || coef=="")
+			{
+				coef_double = 1;
+			}
+			else {
+				coef_double = stod(coef);
+			}
 
-	return str;
-}
-void Parse(string str) {
-	/*int i = 0;
-	const char ch1 = '+';
-	const char ch2 = '-';
-	string bos_deneme;
-	string cpy = str;
-	int pos1 = 0;
-	int pos2 = 0;
-	pos1 = cpy.find(ch1);
-	pos2 = cpy.find(ch2);
-	PolyNode node;
-	node.coef = 0;
-	node.exp = 0;
-	node.next = NULL;
-	int coef = 0, exp = 0;
-	while (cpy.length() != 0) {
-		if (pos1 < pos2) {
-			bos_deneme = cpy.substr(0, pos1);
-			cpy.erase(0, pos1);
-			pos1 = cpy.find(ch1);
+			exp = token[i].substr(pos + 1, token[i].size());
+
+			if (exp == "-") {
+				exp_int = -1;
+			}
+			else if (exp == "+" || exp == "")
+			{
+				exp_int = 1;
+			}
+			else {
+				exp_int = stoi(exp);
+			}
+		}
+		else if ((pos = token[i].find('x')) != string::npos) {
+			coef = token[i].substr(0, pos);
+			if (coef == "-") {
+				coef_double = -1;
+			}
+			else if (coef == "+" || coef == " ")
+			{
+				coef_double = 1;
+			}
+			else {
+				coef_double = stod(coef);
+			}
+			exp_int = 1;
 		}
 		else {
-			if (pos2 == 0) {
-				continue;
-			}
-			bos_deneme = cpy.substr(0, pos2);
-			cpy.erase(0, pos2);
-			pos2 = cpy.find(ch2);
+			coef_double=stod(token[i]);
+			exp_int = 0;
 		}
-	}*/
-
+		head=AddNode(head, coef_double, exp_int);
+		i++;
+	}
+	return head;
 }
 PolyNode* CreatePoly(char* expr) {
+	PolyNode* head = new PolyNode();
 	string str = expr;
 	str = RemoveSpaces(expr);
-	Parse(str);
-	return NULL;
+	head=Parse(str,head);
+	return head;
 } //end-CreatePoly
 
 /// -------------------------------------------------
@@ -127,7 +161,6 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 	}
 
 	return head;
-	return NULL;
 } // end-AddNode
 
 //-------------------------------------------------
