@@ -198,7 +198,26 @@ PolyNode* Subtract(PolyNode* poly1, PolyNode* poly2) {
 //
 PolyNode* Multiply(PolyNode* poly1, PolyNode* poly2) {
 	// Fill this in
-	return NULL;
+	PolyNode* poly3 = new PolyNode();
+	poly3->coef = 0;
+	poly3->exp = 0;
+	poly3->next = NULL;
+	PolyNode* ptr1 = poly1;
+	PolyNode* ptr2 = poly2;
+	int exp = 0;
+	double coef = 0;
+	while (ptr1 != NULL) {
+		while (ptr2 != NULL) {
+
+			coef = ptr1->coef * ptr2->coef;
+			exp = ptr1->exp + ptr2->exp;
+			poly3 = AddNode(poly3, coef, exp);
+			ptr2 = ptr2->next;
+		}
+		ptr2 = poly2;
+		ptr1 = ptr1->next;
+	}
+	return poly3;
 } //end-Multiply
 
 //-------------------------------------------------
