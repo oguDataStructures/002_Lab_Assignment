@@ -2,3 +2,5 @@ C:\Users\yasem\Desktop\Poly\x64\Debug\Poly.exe
 C:\Users\yasem\Desktop\Poly\x64\Debug\Poly.pdb
 D:\Data_Sturucture_Fall_2021\002_Lab_Assignment\Poly\x64\Debug\Poly.exe
 D:\Data_Sturucture_Fall_2021\002_Lab_Assignment\Poly\x64\Debug\Poly.pdb
+C:\Users\yasem\Desktop\002_Lab_Assignment\Poly\x64\Debug\Poly.exe
+C:\Users\yasem\Desktop\002_Lab_Assignment\Poly\x64\Debug\Poly.pdb
