@@ -225,7 +225,7 @@ PolyNode* Multiply(PolyNode* poly1, PolyNode* poly2) {
 //
 double Evaluate(PolyNode* poly, double x) {
 	// Fill this in
-	return 0;
+	return NULL;
 } //end-Evaluate
 
 //-------------------------------------------------
@@ -234,7 +234,17 @@ double Evaluate(PolyNode* poly, double x) {
 //
 PolyNode* Derivative(PolyNode* poly) {
 	// Fill this in
-	return NULL;
+	PolyNode* p = poly;
+	PolyNode* head = new PolyNode();
+	while (p)
+	{
+		if (p->exp != 0)
+		{
+			head=AddNode(head,p->coef * p->exp, p->exp - 1);
+		}
+		p = p->next;
+	}
+	return head;
 } //end-Derivative
 
 //-------------------------------------------------
