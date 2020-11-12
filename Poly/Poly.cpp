@@ -22,7 +22,7 @@ string RemoveSpaces(string str) {
 	str.erase(remove(str.begin(), str.end(), ' '), str.end());
 	return str;
 }
-PolyNode* Parse(string str,PolyNode* head) {
+PolyNode* Parse(string str, PolyNode* head) {
 	string const delims{ "-+" };
 	string const delims1{ "^" };
 	string token[100];
@@ -52,7 +52,7 @@ PolyNode* Parse(string str,PolyNode* head) {
 			if (coef == "-") {
 				coef_double = -1;
 			}
-			else if (coef == "+" || coef=="")
+			else if (coef == "+" || coef == "")
 			{
 				coef_double = 1;
 			}
@@ -88,10 +88,10 @@ PolyNode* Parse(string str,PolyNode* head) {
 			exp_int = 1;
 		}
 		else {
-			coef_double=stod(token[i]);
+			coef_double = stod(token[i]);
 			exp_int = 0;
 		}
-		head=AddNode(head, coef_double, exp_int);
+		head = AddNode(head, coef_double, exp_int);
 		i++;
 	}
 	return head;
@@ -100,7 +100,7 @@ PolyNode* CreatePoly(char* expr) {
 	PolyNode* head = new PolyNode();
 	string str = expr;
 	str = RemoveSpaces(expr);
-	head=Parse(str,head);
+	head = Parse(str, head);
 	return head;
 } //end-CreatePoly
 
@@ -110,7 +110,7 @@ PolyNode* CreatePoly(char* expr) {
 void DeletePoly(PolyNode* Poly) {
 	// Fill this in
 	PolyNode* p = NULL;
-	while ( Poly != NULL)
+	while (Poly != NULL)
 	{
 		p = Poly->next;
 		delete Poly;
@@ -149,6 +149,10 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 			delete node;
 			return head;
 		}
+		else if (p && coef == 0) {
+			delete node;
+			return head;
+		}
 		else
 		{
 			node->next = head;
@@ -180,7 +184,72 @@ PolyNode* AddNode(PolyNode* head, double coef, int exp) {
 //
 PolyNode* Add(PolyNode* poly1, PolyNode* poly2) {
 	// Fill this in
-	return NULL;
+	PolyNode* poly3 = new PolyNode();
+	poly3->coef = 0;
+	poly3->exp = 0;
+	poly3->next = NULL;
+	PolyNode* ptr1 = poly1;
+	PolyNode* ptr2 = poly2;
+	int exp = 0;
+	double coef = 0;
+	while (ptr1->next && ptr2->next) {// ptr1->next != NULL  &&  ptr2 ->next != NULL
+
+		if (ptr1->exp > ptr2->exp) {
+			exp = ptr1->exp;
+			coef = ptr1->coef;
+			ptr1 = ptr1->next;
+		}
+		else if (ptr1->exp < ptr2->exp) {
+			exp = ptr2->exp;
+			coef = ptr2->coef;
+			ptr2 = ptr2->next;
+		}
+		else {
+			exp = ptr1->exp;
+			coef = ptr1->coef + ptr2->coef;
+			ptr1 = ptr1->next;
+			ptr2 = ptr2->next;
+		}
+
+		poly3 = AddNode(poly3, coef, exp);
+	}
+	while (ptr1 || ptr2)
+	{
+		if (ptr1 && !ptr2)
+		{
+			exp = ptr1->exp;
+			coef = ptr1->coef;
+			ptr1 = ptr1->next;
+		}
+		if (ptr2 && !ptr1)
+		{
+			exp = ptr2->exp;
+			coef = ptr2->coef;
+			ptr2 = ptr2->next;
+		}
+		if (ptr1 && ptr2) {
+
+			if (ptr1->exp > ptr2->exp) {
+				exp = ptr1->exp;
+				coef = ptr1->coef;
+				ptr1 = ptr1->next;
+			}
+			else if (ptr1->exp < ptr2->exp) {
+				exp = ptr2->exp;
+				coef = ptr2->coef;
+				ptr2 = ptr2->next;
+			}
+			else {
+				exp = ptr1->exp;
+				coef = ptr1->coef + ptr2->coef;
+				ptr1 = ptr1->next;
+				ptr2 = ptr2->next;
+			}
+		}
+		poly3 = AddNode(poly3, coef, exp);
+
+	}
+	return poly3;
 } //end-Add
 
 //-------------------------------------------------
@@ -189,7 +258,9 @@ PolyNode* Add(PolyNode* poly1, PolyNode* poly2) {
 //
 PolyNode* Subtract(PolyNode* poly1, PolyNode* poly2) {
 	// Fill this in
-	return NULL;
+	PolyNode* poly = CreatePoly((char*)"-1");
+	poly2 = Multiply(poly, poly2);
+	return Add(poly1, poly2);
 } //end-Substract
 
 //-------------------------------------------------
@@ -225,7 +296,13 @@ PolyNode* Multiply(PolyNode* poly1, PolyNode* poly2) {
 //
 double Evaluate(PolyNode* poly, double x) {
 	// Fill this in
-	return NULL;
+	PolyNode* p = poly;
+	double sum = 0;
+	while (p) {
+		sum += pow(x, p->exp) * p->coef;
+		p = p->next;
+	}
+	return sum;
 } //end-Evaluate
 
 //-------------------------------------------------
@@ -240,7 +317,7 @@ PolyNode* Derivative(PolyNode* poly) {
 	{
 		if (p->exp != 0)
 		{
-			head=AddNode(head,p->coef * p->exp, p->exp - 1);
+			head = AddNode(head, p->coef * p->exp, p->exp - 1);
 		}
 		p = p->next;
 	}
