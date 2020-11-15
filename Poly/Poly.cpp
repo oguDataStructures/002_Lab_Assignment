@@ -334,4 +334,45 @@ PolyNode* Derivative(PolyNode* poly) {
 //
 void Plot(PolyNode* poly, int x1, int x2) {
 	// Fill this in	
+	char coordSystem[25][79];
+	double y;
+	for (int i = 0; i < 25; i++)
+	{
+		for (int j = 0; j < 79; j++)
+		{
+			coordSystem[i][j] = ' ';
+		}
+	}
+	for (int i = x1; i <= x2; i++)
+	{
+		y = Evaluate(poly, i);
+		if (13 - y > 25 || y >13)
+			continue;
+		coordSystem[13 - int(round(y))][40 + i] = '*';
+	}
+	for (int i = 0; i < 25; i++)
+	{
+		for (int j = 0; j < 79; j++)
+		{
+			if (i == 13 && j == 40) {
+				coordSystem[i][j] = '+';
+			}
+			else if (j % 5 == 0 && i == 13 && j != 40) {
+				coordSystem[i][j] = '+';
+			}
+			else if (j % 5 != 0 && i == 13 && j != 40) {
+				coordSystem[i][j] = '-';
+			}
+			else if (i % 5 == 3 && j == 40 && i != 13) {
+				coordSystem[i][j] = '+';
+			}
+			else if (i % 5 != 3 && j == 40 && j != 13) {
+				coordSystem[i][j] = '|';
+			}
+			
+			cout << coordSystem[i][j];
+		}
+		cout << endl;
+	}
+
 } //end-Plot
